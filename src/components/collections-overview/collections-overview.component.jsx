@@ -8,11 +8,7 @@ import CollectionPreview from '../collection-preview/collection-preview.componen
 
 import './collections-overview.styles.scss';
 
-const CollectionsOverview = ({ collections }) => {
-    
-    console.log('collections', collections);
-
-    return(
+const CollectionsOverview = ({ collections }) => (
     <div className='collections-overview'>
     {
         collections.map(({id, ...otherCollectionProps}) => (
@@ -22,7 +18,6 @@ const CollectionsOverview = ({ collections }) => {
 
     </div>
 );
-};
 
 const mapStateToProps = createStructuredSelector({
     collections: selectShopCollectionList
