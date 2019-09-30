@@ -45,10 +45,10 @@ export const Footer = styled.div`
     justify-content: space-between;
     font-size: 18px;
 `;
-export const Name = styled.span`
+export const NameContainer = styled.span`
     width: 90%;
     margin-bottom: 15px;
 `;
-export const Price = styled.span`
+export const PriceContainer = styled.span`
 width: 10%;
 `;
