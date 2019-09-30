@@ -8,7 +8,6 @@ import {
     getCurrentUser
 } from '../../firebase/firebase.utils';
 import { 
-    emailSignInStart,
     signInSuccess, 
     signInFailure, 
     signOutSuccess, 
@@ -17,9 +16,9 @@ import {
     signUpFailure
  } from './user.actions';
 
-export function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     try {
-        const userRef = yield call(createUserProfileDocument, userAuth);
+        const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
         const userSnapshot = yield userRef.get();
 
         yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data()}))
@@ -50,10 +49,8 @@ export function* signInWithEmail({payload: {email, password}}) {
 export function* signUp({payload: {displayName, email, password}}) {
     try {
         const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-        yield createUserProfileDocument(user, { displayName });
-
         yield put(signUpSuccess());
-        yield getSnapshotFromUserAuth(user);
+        yield call(getSnapshotFromUserAuth, user, { displayName });
     } catch(error) {
         yield put(signUpFailure(error));
     }
