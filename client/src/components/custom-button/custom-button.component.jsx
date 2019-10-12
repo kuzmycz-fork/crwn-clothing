@@ -8,4 +8,4 @@ const CustomButton = ({ children, ...otherProps}) => (
     </CustomButtonContainer>
 );
 
-export default CustomButton;
+export default React.memo(CustomButton);

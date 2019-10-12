@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
@@ -22,13 +22,14 @@ const CartDropdown = ( { cartItems, history, dispatch } ) => (
                     <span className='empty-message'>Your cart is empty</span>
                 )}
         </div>
-        <CustomButton onClick={() => { 
+        <CustomButton onClick={useCallback(() => { 
             history.push('/checkout');
             dispatch(toggleCartHidden());
-        }}>GO TO CHECKOUT</CustomButton>
+        }, [history, dispatch])}>GO TO CHECKOUT</CustomButton>
     </div>
 
 );
+
 
 
 const mapStateToProps = createStructuredSelector({
